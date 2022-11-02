@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const StatusSchema = new mongoose.Schema(
   {
-    cod: { type: String, required: true },
+    cod: { type: String },
     status: { type: String, required: true },
   },
   {

@@ -7,7 +7,7 @@ router
   .get("/burgers", BurgerController.getBurgers)
   .get("/burgers/:id", BurgerController.getBurgersById)
   .post("/burgers", BurgerController.createBurger)
-  .put("burgers/:id", BurgerController.updateBurger)
+  .put("/burgers/:id", BurgerController.updateBurger)
   .delete("/burgers/:id", BurgerController.deleteBurger);
 
 module.exports = router;

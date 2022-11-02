@@ -2,18 +2,16 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "MAKE YOURT BURGER REST API",
+    "description": "Api para controle de uma lanchonete de hamburguers"
   },
   "host": "localhost:3000",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/burgers": {
       "get": {
-        "description": "",
+        "description": "Para listar pedidos de burgers",
         "parameters": [],
         "responses": {
           "200": {
@@ -22,8 +20,22 @@
         }
       },
       "post": {
-        "description": "",
-        "parameters": [],
+        "description": "Para Criar um pedido de burger",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "example": {
+              "name": "Nome do cliente",
+              "meat": "Tipo de carne",
+              "bread": "Tipo de pão",
+              "optional": ["tipo de acompanhamento"],
+              "status": "Status de solicitação"
+            },
+            "type": "string"
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -36,7 +48,7 @@
     },
     "/burgers/{id}": {
       "get": {
-        "description": "",
+        "description": "Para listar um pedido de burger por ID",
         "parameters": [
           {
             "name": "id",
@@ -54,13 +66,25 @@
           }
         }
       },
-      "delete": {
-        "description": "",
+      "put": {
+        "description": "Para atualizar um pedido de burger",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "example": {
+              "name": "Nome do cliente",
+              "meat": "Tipo de carne",
+              "bread": "Tipo de pão",
+              "optional": ["tipo de acompanhamento"],
+              "status": "Status de solicitação"
+            },
             "type": "string"
           }
         ],
@@ -72,11 +96,9 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "burgers/{id}": {
-      "put": {
-        "description": "",
+      },
+      "delete": {
+        "description": "Para deletar um pedido de burger",
         "parameters": [
           {
             "name": "id",
@@ -97,8 +119,15 @@
     },
     "/ingredients": {
       "get": {
-        "description": "",
-        "parameters": [],
+        "description": "Listar Todos ingredientes ou Listar por tipo",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string",
+            "example": "Pão"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -107,7 +136,19 @@
       },
       "post": {
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "string",
+            "required": true,
+            "example": {
+              "cod": "codigo do ingrediente",
+              "type": "tipo de ingrediente ex: Carne",
+              "name": "nome do ingrediente ex: Alcatra"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -120,7 +161,7 @@
     },
     "/ingredients/{id}": {
       "get": {
-        "description": "",
+        "description": "Listar ingrediente por id",
         "parameters": [
           {
             "name": "id",
@@ -139,7 +180,37 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Atualizar um ingrediente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "type": "string",
+            "required": true,
+            "example": {
+              "cod": "codigo do ingrediente",
+              "type": "tipo de ingrediente ex: Carne",
+              "name": "nome do ingrediente ex: Alcatra"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Para deletar um ingrediente",
         "parameters": [
           {
             "name": "id",
@@ -158,10 +229,49 @@
         }
       }
     },
-    "/ingredients/id": {
-      "delete": {
-        "description": "",
+    "/status": {
+      "get": {
+        "description": "Para listar status disponiveis",
         "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "Para Criar um status",
+        "parameters": [
+          {
+            "required": true,
+            "in": "body",
+            "name": "body",
+            "example": {
+              "status": "Status de solicitação ex: Finalizado"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/status/{id}": {
+      "delete": {
+        "description": "Deletar Status por id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
