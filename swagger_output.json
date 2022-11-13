@@ -7,7 +7,7 @@
   },
   "host": "localhost:3000",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": ["http","https"],
   "paths": {
     "/burgers": {
       "get": {
